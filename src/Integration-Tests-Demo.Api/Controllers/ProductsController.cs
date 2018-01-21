@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Integration_Tests_Demo.Api.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class ProductsController : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -22,9 +22,24 @@ namespace Integration_Tests_Demo.Api.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Product product)
+        {
+            using (var conn = await GetConnection())
+            {
+                var param = new { id = product.Id, name = product.Name, isActive = product.IsActive }; 
+
+                var sql = @"INSERT INTO dbo.Products(Id, Name, IsActive) VALUES(@id, @name, @isActive)";
+                
+                await conn.ExecuteAsync(sql, param);
+
+                return Accepted();
+            }
+        }
+
         private async Task<IDbConnection> GetConnection()
         {
-            var conn = new SqlConnection("Server=192.168.0.8,1401;Database=Products;User=sa;Password=Pa33WorD!;");
+            var conn = new SqlConnection("Server=demo.db;Database=Products;User=sa;Password=Pa33WorD!;");
             await conn.OpenAsync();
             return conn;
         }

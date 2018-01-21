@@ -1,13 +1,6 @@
 version: '3'
 
 services:
-  test:
-    image: local/integration-tests-demo.tests
-    build:
-      context: ./test/Integration-Tests-Demo.Tests
-      dockerfile: Dockerfile
-    depends_on:
-      - api
   api:
     image: local/integration-tests-demo.api
     build:

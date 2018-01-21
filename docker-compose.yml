@@ -1,7 +1,15 @@
 version: '3'
 
 services:
-  api:
+  demo.test:
+    image: local/integration-tests-demo.tests
+    build:
+      context: ./test/Integration-Tests-Demo.Tests
+      dockerfile: Dockerfile
+    depends_on:
+      - demo.api
+      - demo.db
+  demo.api:
     image: local/integration-tests-demo.api
     build:
       context: ./src/Integration-Tests-Demo.Api
@@ -9,8 +17,8 @@ services:
     ports:
       - 5000:80
     depends_on:
-      - db
-  db:
+      - demo.db
+  demo.db:
     image: local/integration-tests-demo.db
     build:
       context: ./src/Integration-Tests-Demo.db
