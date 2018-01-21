@@ -16,6 +16,7 @@ if [ $STATUS -ne 0 ]; then
 fi
 
 echo "======= MSSQL SERVER STARTED ========" | tee -a ./config.log
+
 # Run the setup script to create the DB and the schema in the DB
 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Pa33WorD! -d master -i create-database.sql
 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Pa33WorD! -d master -i migration.sql
