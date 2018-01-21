@@ -6,12 +6,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Integration_Tests_Demo.Api.Controllers
 {
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
+        private DatabaseOptions _databaseOptions;
+
+        public ProductsController(IOptions<DatabaseOptions> databaseOptions)
+        {
+            _databaseOptions = databaseOptions.Value;
+        }
+        
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -39,7 +47,7 @@ namespace Integration_Tests_Demo.Api.Controllers
 
         private async Task<IDbConnection> GetConnection()
         {
-            var conn = new SqlConnection("Server=demo.db;Database=Products;User=sa;Password=Pa33WorD!;");
+            var conn = new SqlConnection(_databaseOptions.ApiConnection);
             await conn.OpenAsync();
             return conn;
         }

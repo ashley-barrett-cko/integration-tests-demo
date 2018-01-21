@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Integration-Tests-Demo.Console/Integration-Tests-Demo.Console.csproj"
+                "${workspaceFolder}/src/Integration-Tests-Demo.Api/Integration-Tests-Demo.Api.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

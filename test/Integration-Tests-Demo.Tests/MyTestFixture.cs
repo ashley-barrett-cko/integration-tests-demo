@@ -52,7 +52,7 @@ namespace Integration_Tests_Demo.Tests
             using(var c = new HttpClient())
             {
                 c.BaseAddress = new Uri("http://demo.api/");
-                var product = new Product { Id = 10, Name = "Milk", IsActive = true };
+                var product = new Product { Id = Guid.NewGuid(), Name = "Milk", IsActive = true };
                 var json = JsonConvert.SerializeObject(product);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await c.PostAsync("/api/products", content);

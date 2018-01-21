@@ -20,6 +20,10 @@ namespace Integration_Tests_Demo.Api
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .ConfigureAppConfiguration((hostContext, config) =>
+                {
+                    config.AddEnvironmentVariables("API_");
+                })
                 .Build();
     }
 }

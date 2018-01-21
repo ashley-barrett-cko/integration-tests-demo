@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5000:80
+    environment:
+      API_Database:ApiConnection: Server=demo.db;Database=Products;User=sa;Password=Pa33WorD!
     depends_on:
       - demo.db
   demo.db:
