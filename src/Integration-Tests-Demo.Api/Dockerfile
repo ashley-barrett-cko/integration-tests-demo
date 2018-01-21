@@ -14,4 +14,4 @@ COPY --from=build /output /app
 
 WORKDIR /app
 
-ENTRYPOINT [ "dotnet", "Integration-Tests-Demo.Console.dll" ]
+ENTRYPOINT [ "dotnet", "Integration-Tests-Demo.Api.dll" ]
